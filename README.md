@@ -11,19 +11,25 @@ will fail on some windows systems, because they fail to understand the
 `/` path separator. This crate allows you to replace that with:
 
 ```rust, ignore
-include!(concat!(env!("OUT_DIR"), path_separator!(), "somefile.rs"));
+include!(join_path!(env!("OUT_DIR"), "somefile.rs"));
 ```
 
-This will work on all operating systems.
+This will work on all operating systems. You can create paths starting with the
+separator by prepending `/` to the `join_path!` arguments:
 
-# Usage 
+```rust, ignore
+join_path!(/ "usr", "local", "lib");
+```
+
+# Usage
+
 Add this to your Cargo.toml:
 ```
 pathsep = "0.1"
 ```
 Then you can use `#[macro_use] extern crate pathsep;` in your crate root. As of
 Rust 1.30, you can also omit the `#[macro_use]` and
-`use pathsep::path_separator;` directly.
+`use pathsep::join_path;` directly.
 
 ## License
 
